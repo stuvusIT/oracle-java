@@ -1,4 +1,4 @@
-# awx
+# oracle-java
 
 This role installs the Oracle Java distribution.
 The license is automatically accepted.
