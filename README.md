@@ -1,17 +1,19 @@
 # oracle-java
 
-This role installs the Oracle Java distribution.
+This role installs the Oracle Java distribution including the unlimited strength policy.
 The license is automatically accepted.
+Additionally, you can add certificate files to the cacerts keystore
 
 ## Requirements
 
-Ubuntu
+Debian or Ubuntu
 
 ## Role Variables
 
-| Name                  | Default/Required | Description                             |
-|-----------------------|:----------------:|-----------------------------------------|
-| `oracle_java_version` | `8`              | Major version number of Java to install |
+| Name                  | Default/Required | Description                                               |
+|-----------------------|:----------------:|-----------------------------------------------------------|
+| `oracle_java_version` | `8`              | Major version number of Java to install                   |
+| `oracle_java_cacerts` | `[]`             | List of paths to certificates to import into the keystore |
 
 ## Example Playbook
 

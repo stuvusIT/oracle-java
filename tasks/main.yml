@@ -1,7 +1,12 @@
 ---
+- name: Add apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: C2518248EEA14886
+
 - name: Add apt repository
   apt_repository:
-    repo: ppa:webupd8team/java
+    repo: "deb http://ppa.launchpad.net/webupd8team/java/ubuntu {% if ansible_distribution == 'Debian' %}bionic{% else %}{{ ansible_distribution_release }}{% endif %} main"
     filename: java
     update_cache: yes
 
@@ -16,3 +21,12 @@
   with_items:
     - oracle-java{{ oracle_java_version }}-installer
     - oracle-java{{ oracle_java_version }}-set-default
+    - oracle-java{{ oracle_java_version }}-unlimited-jce-policy
+
+- name: Install custom certificates
+  java_cert:
+    cert_alias: "{{ item | basename }}"
+    cert_path: "{{ item }}"
+    keystore_pass: changeit
+    keystore_path: /usr/lib/jvm/java-{{ oracle_java_version }}-oracle/jre/lib/security/cacerts
+  with_items: "{{ oracle_java_cacerts }}"
