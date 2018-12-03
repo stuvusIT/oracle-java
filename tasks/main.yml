@@ -17,11 +17,10 @@
 
 - name: Install Java
   apt:
-    name: "{{ item }}"
-  with_items:
-    - oracle-java{{ oracle_java_version }}-installer
-    - oracle-java{{ oracle_java_version }}-set-default
-    - oracle-java{{ oracle_java_version }}-unlimited-jce-policy
+    name:
+      - oracle-java{{ oracle_java_version }}-installer
+      - oracle-java{{ oracle_java_version }}-set-default
+      - oracle-java{{ oracle_java_version }}-unlimited-jce-policy
 
 - name: Install custom certificates
   java_cert:
